@@ -1,0 +1,6 @@
+KVstorageBaseRaft-cpp
+leveldb
+.vscode
+build
+bin
+.cache
