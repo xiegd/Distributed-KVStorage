@@ -1,8 +1,8 @@
 /*
  * 线性同余法(LCG, Linear Congruential Generator)，生成伪随机数
 */
-#ifndef D_KVSTORAGE_RANDOM_H
-#define D_KVSTORAGE_RANDOM_H
+#ifndef KVSTORAGE_UTIL_RANDOM_H_
+#define KVSTORAGE_UTIL_RANDOM_H_
 
 #include <cstdint>
 

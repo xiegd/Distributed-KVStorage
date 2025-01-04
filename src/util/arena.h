@@ -2,8 +2,8 @@
 * 内存分配器, arena
 * 用于临时对象的分配
 */
-#ifndef D_KVSTORAGE_ARENA_H
-#define D_KVSTORAGE_ARENA_H
+#ifndef KVSTORAGE_UTIL_ARENA_H_
+#define KVSTORAGE_UTIL_ARENA_H_
 
 #include <atomic>
 #include <cassert>

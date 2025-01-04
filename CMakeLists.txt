@@ -39,11 +39,13 @@ list(APPEND INCLUDE_DIRS
   ${SOURCE_DIR}
   ${SOURCE_DIR}/database 
   ${SOURCE_DIR}/util
+  ${SOURCE_DIR}/include
 )
 
 set(TEST_FILEPATH ${CMAKE_SOURCE_DIR}/test)
 
 file(GLOB DATABASE_SRCS ${SOURCE_DIR}/database/*.cc)
+file(GLOB INCLUDE_SRCS ${SOURCE_DIR}/include/*.cc)
 file(GLOB UTIL_SRCS ${SOURCE_DIR}/util/*.cc)
 
 file(GLOB DATABASE_HEAD ${SOURCE_DIR}/database/*.h)
@@ -51,17 +53,18 @@ file(GLOB UTIL_HEAD ${SOURCE_DIR}/util/*.h)
 
 message(STATUS "UTIL_SRCS: ${UTIL_SRCS}")
 
-add_executable(arena_test ${TEST_FILEPATH}/arena_test.cc 
+add_executable(status_test ${TEST_FILEPATH}/status_test.cc 
               ${UTIL_SRCS}
               ${DATABASE_SRCS}
+              ${INCLUDE_SRCS}
               )
 
-  target_include_directories(arena_test 
+target_include_directories(status_test 
   PRIVATE
     ${INCLUDE_DIRS}
 )
 
-target_link_libraries(arena_test gtest_main OpenSSL::Crypto OpenSSL::SSL)
+target_link_libraries(status_test gtest_main OpenSSL::Crypto OpenSSL::SSL)
 
-set_target_properties(arena_test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}) 
+set_target_properties(status_test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}) 
 
