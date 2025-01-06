@@ -2,6 +2,7 @@
  *  基于 murmur hash 的变种哈希函数, 快速哈希
 */
 #include "hash.h"
+#include "coding.h"
 
 // fall-through：在 switch 语句中, 执行完一个 case 后, 继续执行下一个 case
 // 使用自定义的 FALLTHROUGH_INTENDED 宏, 或者 [[fallthrough]] 属性，提高代码可读性

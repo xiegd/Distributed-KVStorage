@@ -1,8 +1,11 @@
 /*
  *  编码和解码函数
- *  Fixed: 固定长度编码
- *  Varint: 变长编码
- *  LengthPrefixedSlice: 长度前缀编码
+ *  Fixed: 固定长度编码, 使用4bytes/8bytes将一个u32或u64的无符号数编码到每一个字节;
+ *  Varint: 变长编码, 每个字节后7位存数据，最高位作为标志位，为1表示字符未结束, 从而节省存储空间;
+ *  由于每个字节只有7位存储数据，所以u32最多需要5bytes编码，u64最多需要10bytes编码;
+ *
+ *  Put: 将value编码然后添加到dst中
+ *  Get: 从dst中解码出value
 */
 #ifndef KVSTORAGE_UTIL_CODING_H_
 #define KVSTORAGE_UTIL_CODING_H_
@@ -24,9 +27,10 @@ void PutLengthPrefixedSlice(std::string* dst, const Slice& value);
 bool GetVarint32(Slice* input, uint32_t* value);
 bool GetVarint64(Slice* input, uint64_t* value);
 bool GetLengthPrefixedSlice(Slice* input, Slice* result);
+const char* GetVarint32PtrFallback(const char* p, const char* limit, uint32_t* value);
 
-const char* GetVarint32Ptr(const char* p, const char* limit, uint32_t* v);
-const char* GetVarint64Ptr(const char* p, const char* limit, uint64_t* v);
+const char* GetVarint32Ptr(const char* p, const char* limit, uint32_t* value);
+const char* GetVarint64Ptr(const char* p, const char* limit, uint64_t* value);
 
 int VarintLength(uint64_t v);
 
@@ -78,18 +82,6 @@ inline uint64_t DecodeFixed64(const char* ptr) {
            | (static_cast<uint64_t>(buffer[7]) << 56);
 }
 
-const char* GetVarint32PtrFallback(const char* p, const char* limit, uint32_t* value);
-
-inline const char* GetVarint32Ptr(const char* p, const char* limit, uint32_t* value) {
-    if (p < limit) {
-        uint32_t result = *(reinterpret_cast<const uint8_t*>(p));
-        if ((result & 128) == 0) {
-            *value = result;
-            return p + 1;
-        }
-    }
-    return GetVarint32PtrFallback(p, limit, value);
-}
 }
 
 #endif
