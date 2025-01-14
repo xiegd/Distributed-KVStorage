@@ -1,13 +1,7 @@
 # KVstorageBaseRaft-cpp
 # leveldb
-KVstorageBaseRaft-cpp/build
-KVstorageBaseRaft-cpp/bin
-KVstorageBaseRaft-cpp/lib
-KVstorageBaseRaft-cpp/muduo
-KVstorageBaseRaft-cpp/.github
-leveldb/build
-leveldb/cmake
-leveldb/.github
+KVstorageBaseRaft-cpp
+leveldb
 .vscode
 build
 bin

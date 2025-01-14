@@ -45,7 +45,7 @@ public:
         }
     }
 
-    // 在不影响比较结果的前提下，将key转换为最小的key
+    // 在不影响比较结果的前提下，将key转换为最小的key(最小指的是占的存储空间)
     void findShortSuccessor(std::string* key) const override {
         size_t n = key->size();
         for (size_t i = 0; i < n; i++) {

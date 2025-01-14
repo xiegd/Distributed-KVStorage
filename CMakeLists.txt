@@ -53,18 +53,18 @@ file(GLOB UTIL_HEAD ${SOURCE_DIR}/util/*.h)
 
 message(STATUS "UTIL_SRCS: ${UTIL_SRCS}")
 
-add_executable(status_test ${TEST_FILEPATH}/status_test.cc 
+add_executable(no_destructor_test ${TEST_FILEPATH}/no_destructor_test.cc 
               ${UTIL_SRCS}
               ${DATABASE_SRCS}
               ${INCLUDE_SRCS}
               )
 
-target_include_directories(status_test 
+target_include_directories(no_destructor_test 
   PRIVATE
     ${INCLUDE_DIRS}
 )
 
-target_link_libraries(status_test gtest_main OpenSSL::Crypto OpenSSL::SSL)
+target_link_libraries(no_destructor_test gtest_main OpenSSL::Crypto OpenSSL::SSL)
 
-set_target_properties(status_test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}) 
+set_target_properties(no_destructor_test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}) 
 
